@@ -28,5 +28,6 @@ int netdev_transmit(struct sk_buff *skb, uint8_t *dst, uint16_t ethertype);
 void *netdev_rx_loop();
 void free_netdev();
 struct netdev *netdev_get(uint32_t sip);
+struct netdev *netdev_alloc(char *addr, char *hwaddr, uint32_t);
 
 #endif //CIP_NETDEV_H

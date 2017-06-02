@@ -10,7 +10,7 @@ struct netdev *loop;
 struct netdev *netdev;
 extern int running;
 
-static struct netdev *netdev_alloc(char *addr, char *hwaddr, uint32_t mtu)
+struct netdev *netdev_alloc(char *addr, char *hwaddr, uint32_t mtu)
 {
     struct netdev *dev = malloc(sizeof(struct netdev));
 
@@ -50,8 +50,8 @@ int netdev_transmit(struct sk_buff *skb, uint8_t *dst_hw, uint16_t ethertype)
     memcpy(hdr->dmac, dst_hw, dev->addr_len);
     memcpy(hdr->smac, dev->hwaddr, dev->addr_len);
 
-    eth_dbg("out", hdr);
     hdr->ethertype = htons(ethertype);
+    eth_dbg("out", hdr);
 
     ret = tun_write((char *)skb->data, skb->len);
 
@@ -70,7 +70,7 @@ static int netdev_receive(struct sk_buff *skb)
             arp_rcv(skb);
             break;
         case ETH_P_IP:
-//            ip_rcv(skb);
+            ip_rcv(skb);
             break;
         case ETH_P_IPV6:
         default:
