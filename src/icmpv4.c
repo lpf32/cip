@@ -7,7 +7,11 @@ void icmpv4_incoming(struct sk_buff *skb)
     struct iphdr *iphdr = ip_hdr(skb);
     struct icmp_v4 *icmp = (struct icmp_v4 *) iphdr->data;
 
-    //TODO: Check sum
+    //FIXME: Check sum
+    uint16_t sum = checksum(icmp, (iphdr->len -iphdr->ihl*4), 0);
+    if (sum != 0)
+        goto drop_pkt;
+
 
     switch (icmp->type) {
         case ICMP_V4_ECHO:

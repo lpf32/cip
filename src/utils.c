@@ -55,3 +55,12 @@ uint16_t checksum(void *addr, int count, int start_sum)
 
     return ~sum;
 }
+
+uint32_t parse_ipv4_string(char *addr)
+{
+    uint8_t addr_byte[4];
+    sscanf(addr, "%hhu.%hhu.%hhu.%hhu", &addr_byte[3], &addr_byte[2], &addr_byte[1],
+                                        &addr_byte[0]);
+
+    return addr_byte[0] | addr_byte[1] << 8 | addr_byte[2] << 16 | addr_byte[3] << 24;
+}

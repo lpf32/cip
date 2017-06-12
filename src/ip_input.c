@@ -51,7 +51,7 @@ int ip_rcv(struct sk_buff *skb)
             icmpv4_incoming(skb);
             return 0;
         case IP_TCP:
-//            tcp_in(skb);
+            tcp_in(skb);
             return 0;
         default:
             print_err("Unknown IP header proto\n");

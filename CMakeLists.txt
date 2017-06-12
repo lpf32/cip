@@ -4,7 +4,8 @@ project(cip C CXX)
 
 set(C_FLAGS
         -DDEBUG_ETH
-        -DDEBUG_ARP)
+        -DDEBUG_ARP
+        -DDEBUG_IP)
 
 string(REPLACE ";" " " CMAKE_C_FLAGS "${C_FLAGS}")
 message(STATUS "C_FLAGS = " ${CMAKE_C_FLAGS})

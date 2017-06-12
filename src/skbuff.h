@@ -58,13 +58,13 @@ static inline void skb_queue_add(struct sk_buff_head *list,
     list->qlen += 1;
 }
 
-static inline void skq_queue_tail(struct sk_buff_head *list, struct sk_buff *new_skb)
+static inline void skb_queue_tail(struct sk_buff_head *list, struct sk_buff *new_skb)
 {
     list_add(&new_skb->list, &list->head);
     list->qlen += 1;
 }
 
-static inline struct sk_buff *skb_dqueue(struct sk_buff_head *list)
+static inline struct sk_buff *skb_dequeue(struct sk_buff_head *list)
 {
     struct sk_buff *skb = list_first_entry(&list->head, struct sk_buff, list);
     list_del(&skb->list);
@@ -90,7 +90,7 @@ static inline void skb_queue_free(struct sk_buff_head *list) {
 
     while ((skb = skb_peek(list)) != NULL)
     {
-        skb_dqueue(list);
+        skb_dequeue(list);
         skb->refcnt--;
         free_skb(skb);
     }

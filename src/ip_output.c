@@ -15,7 +15,8 @@ int ip_output(struct sock *sk, struct sk_buff *skb)
     struct rtentry *rt;
     struct iphdr *ihdr = ip_hdr(skb);
 
-    rt = route_lookup(ihdr->daddr);
+    // FIXME: saddr or daddr
+    rt = route_lookup(sk->daddr);
 
     if (!rt) {
         // TODO: dest_unreadchable

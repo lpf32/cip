@@ -11,7 +11,7 @@
 #define ICMPV4 0x01
 
 #define IP_HDR_LEN sizeof(struct iphdr)
-#define ip_len(ip) (ip->len - (ip-ihl * 4))
+#define ip_len(ip) (ip->len - (ip->ihl * 4))
 
 #ifdef DEBUG_IP
 #define ip_dbg(msg, hdr)                                                \

@@ -7,7 +7,7 @@
 
 struct sock;
 
-struct net_pos
+struct net_ops
 {
     struct sock* (*alloc_sock)(int protocol);
     int (*init)(struct sock *sk);
@@ -27,7 +27,7 @@ struct sock
     struct wait_lock recv_wait;
     struct sk_buff_head receive_queue;
     struct sk_buff_head write_queue;
-    pthread_attr_t lock;
+    pthread_mutex_t lock;
     int protocol;
     int state;
     int err;
